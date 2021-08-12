@@ -20,11 +20,19 @@ namespace LMSProject.UI.MVC
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Scripts/js/jquery-1.11.1.min.js",
+                      "~/Scripts/js/templatemo_custom.js",
+                      "~/Scripts/js/bootstrap-collapse.js",
+                      "~/Scripts/js/bootstrap-collapse.js",
+                      "~/Scripts/js/jquery-ui.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/css/font-awesome.min.css",
+                      "~/Content/css/bootstrap.min.css",
+                      "~/Content/css/jquery-ui.css",
+                      "~/Content/css/templatemo_misc.css",
+                      "~/Content/css/templatemo_style.css"));
         }
     }
 }

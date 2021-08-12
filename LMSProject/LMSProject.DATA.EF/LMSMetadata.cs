@@ -54,8 +54,8 @@ namespace LMSProject.DATA.EF
         [StringLength(200, ErrorMessage = "Lesson Title cannot exceed 200 characters")]
         public string LessonTitle { get; set; }
 
-        [Required(ErrorMessage = "Course ID is required")]
-        [Display(Name = "Course ID")]
+        [Required(ErrorMessage = "Course is required")]
+        [Display(Name = "Course")]
         public int CourseId { get; set; }
 
         [StringLength(300, ErrorMessage = "Introduction cannot exceed 300 characters")]
@@ -100,7 +100,6 @@ namespace LMSProject.DATA.EF
     }
 
     [MetadataType(typeof(UserDetailMetadata))]
-    public partial class UserDetail { }
 
     public class UserDetailMetadata
     {
@@ -119,4 +118,11 @@ namespace LMSProject.DATA.EF
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
     }
+
+    public partial class UserDetail
+    {
+        [Display(Name = "Name")]
+        public string FullName => FirstName + "" + LastName;
+    }
+    
 }

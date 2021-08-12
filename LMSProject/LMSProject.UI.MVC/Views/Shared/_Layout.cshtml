@@ -1,49 +1,85 @@
 ﻿<!DOCTYPE html>
-<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>Spira's Blitzball Training Camp</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <!--
+    Green Template
+    http://www.templatemo.com/preview/templatemo_449_green
+    -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
 
+    @*<link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/Content/css/jquery-ui.css" />*@ <!-- popular tab -->
+    @*<link rel="stylesheet" href="~/Content/css/templatemo_misc.css">
+        <link rel="stylesheet" href="~/Content/css/templatemo_style.css">*@
+    @Styles.Render("~/Content/css")
+    <!-- JavaScripts -->
+    @Scripts.Render("~/bundles/bootstrap")
+    @*<script src="~/Scripts/js/jquery-1.11.1.min.js"></script>*@ <!-- lightbox -->
+    @*<script src="~/Scripts/js/templatemo_custom.js"></script>*@ <!-- lightbox -->
+    @*<script src="~/Scripts/js/bootstrap-collapse.js"></script>
+        <script src="~/Scripts/js/jquery-ui.min.js"></script>*@ <!-- popular tab -->
+    <!-- JavaScripts -->
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    <!-- menu start -->
+    <div class="container menu">
+        <div class="row">
+            @*<div class="col-sm-4">
+                <div class="templatemo_webtitle"><img src="images/templatemo_logo.png" alt="logo"></div>
+            </div>*@
+            <div class="col-sm-12">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div id="top-menu">
+                            <div class="collapse navbar-collapse main_menu" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        <li>@Html.ActionLink("Lessons", "Index", "Lessons")</li>
+                                        <li>@Html.ActionLink("Courses", "Index", "Courses")</li>
+                                        <li>@Html.ActionLink("Completed Courses", "Index", "CourseCompletions")</li>
+                                        
+                                    }
+                                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                    @if (User.IsInRole("Admin") && Request.IsAuthenticated)
+                                    {
+                                        <li>@Html.ActionLink("Roles Admin", "Index", "RolesAdmin")</li>
+                                        <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
+                                    }
 
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
-                        <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
-                        <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
-                    }
-                </ul>
-                @Html.Partial("_LoginPartial")
+                                    @Html.Partial("_LoginPartial")
+                                </ul>
+
+                            </div>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @RenderBody()
     @RenderSection("scripts", required: false)
+    <!-- footer start -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 margin30 center">Copyright &copy; 2021 Spira's Blitzball Training Camp</div>
+            <div class="margin30">&nbsp;</div>
+        </div>
+    </div>
+    <!-- footer end -->
 </body>
 </html>

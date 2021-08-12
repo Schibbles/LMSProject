@@ -159,7 +159,7 @@ namespace LMSProject.UI.MVC.Controllers
                     newUserDetails.UserId = user.Id;
                     newUserDetails.FirstName = model.FirstName;
                     newUserDetails.LastName = model.LastName;
-
+                    UserManager.AddToRole(user.Id, "Employee");
                     LMSEntities1 db = new LMSEntities1();
                     db.UserDetails.Add(newUserDetails);
                     db.SaveChanges();
