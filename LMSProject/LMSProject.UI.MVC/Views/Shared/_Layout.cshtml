@@ -19,7 +19,6 @@
         <link rel="stylesheet" href="~/Content/css/templatemo_style.css">*@
     @Styles.Render("~/Content/css")
     <!-- JavaScripts -->
-    @Scripts.Render("~/bundles/bootstrap")
     @*<script src="~/Scripts/js/jquery-1.11.1.min.js"></script>*@ <!-- lightbox -->
     @*<script src="~/Scripts/js/templatemo_custom.js"></script>*@ <!-- lightbox -->
     @*<script src="~/Scripts/js/bootstrap-collapse.js"></script>
@@ -52,7 +51,9 @@
                                     </li>
                                     @if (Request.IsAuthenticated)
                                     {
-                                        <li>@*@Html.ActionLink("Lessons Completed", "Index", "LessonViews")*@</li>
+                                        @*<li>
+                                                <a href="@Url.Action("Index", "LessonViews")">Lessons Completed</a>
+                                            </li>*@
                                         <li>
                                             <a href="@Url.Action("Index", "Courses")">Courses</a>
                                         </li>
@@ -68,7 +69,7 @@
                                         </li>
                                         <li>
                                             <a href="@Url.Action("Index", "UsersAdmin")">Users</a>
-                                    </li>
+                                        </li>
                                     }
 
                                     <li>@Html.Partial("_LoginPartial")</li>
@@ -95,6 +96,8 @@
     <!-- footer end -->
 </body>
 
+
+@Scripts.Render("~/bundles/bootstrap")
 <script>
     $('nav a').each(function () {
 

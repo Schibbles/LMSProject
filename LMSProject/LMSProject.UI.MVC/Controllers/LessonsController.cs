@@ -52,6 +52,7 @@ namespace LMSProject.UI.MVC.Controllers
                 db.SaveChanges();
             }
             #endregion
+
             #region Record Course Completion
             Lesson lesson = db.Lessons.Find(id);
             int courseLessonCount = db.Lessons.Where(x => x.CourseId == lesson.CourseId && x.IsActive == true).Count();

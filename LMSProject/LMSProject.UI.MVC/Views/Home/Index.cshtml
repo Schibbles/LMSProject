@@ -7,9 +7,14 @@
                     <div class="templatemo_hometop_title">Blitzball</div>
                     <div class="templatemo_hometop_stitle">Training Courses</div>
                     <p>
-                        This is where employees will find all of the annual training courses that they must undergo.
+                        This is Spira's Blitzball Training Camp. Anyone that is looking to learn about the sport of blitzball is welcome to come sign up for our training courses.
                     </p>
+                    @if (Request.IsAuthenticated)
+                    {
                     <a href="@Url.Action("Index", "Courses")"><div class="templatemo_buttongreen">View Your Courses</div></a>
+                    
+                    }
+                    <a href="~/Content/LMSDocumentation.pdf"><div class="templatemo_buttongreen">LMSDocumentation</div></a>
                     <div class="clear"></div>
                 </div>
             

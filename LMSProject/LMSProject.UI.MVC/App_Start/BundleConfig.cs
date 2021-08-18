@@ -24,7 +24,6 @@ namespace LMSProject.UI.MVC
                       "~/Scripts/js/jquery-1.11.1.min.js",
                       "~/Scripts/js/templatemo_custom.js",
                       "~/Scripts/js/bootstrap-collapse.js",
-                      "~/Scripts/js/bootstrap-collapse.js",
                       "~/Scripts/js/jquery-ui.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
