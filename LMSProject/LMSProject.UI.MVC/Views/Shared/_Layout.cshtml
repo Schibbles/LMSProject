@@ -31,8 +31,8 @@
     <div class="container menu">
         <div class="row">
             @*<div class="col-sm-4">
-                <div class="templatemo_webtitle"><img src="images/templatemo_logo.png" alt="logo"></div>
-            </div>*@
+                    <div class="templatemo_webtitle"><img src="images/templatemo_logo.png" alt="logo"></div>
+                </div>*@
             <div class="col-sm-12">
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="container-fluid">
@@ -44,22 +44,34 @@
                         <div id="top-menu">
                             <div class="collapse navbar-collapse main_menu" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
-                                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                    <li>
+                                        <a href="@Url.Action("Index", "Home")">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Contact", "Home")">Contact</a>
+                                    </li>
                                     @if (Request.IsAuthenticated)
                                     {
-                                        <li>@Html.ActionLink("Lessons", "Index", "Lessons")</li>
-                                        <li>@Html.ActionLink("Courses", "Index", "Courses")</li>
-                                        <li>@Html.ActionLink("Completed Courses", "Index", "CourseCompletions")</li>
-                                        
+                                        <li>@*@Html.ActionLink("Lessons Completed", "Index", "LessonViews")*@</li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "Courses")">Courses</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "CourseCompletions")">Completed Courses</a>
+                                        </li>
+
                                     }
-                                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                     @if (User.IsInRole("Admin") && Request.IsAuthenticated)
                                     {
-                                        <li>@Html.ActionLink("Roles Admin", "Index", "RolesAdmin")</li>
-                                        <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "RolesAdmin")">Roles</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index", "UsersAdmin")">Users</a>
+                                    </li>
                                     }
 
-                                    @Html.Partial("_LoginPartial")
+                                    <li>@Html.Partial("_LoginPartial")</li>
                                 </ul>
 
                             </div>
@@ -82,4 +94,15 @@
     </div>
     <!-- footer end -->
 </body>
+
+<script>
+    $('nav a').each(function () {
+
+        if ($(this).attr('href') == window.location.pathname) {
+
+            $(this).addClass('active');
+        }
+    });
+</script>
+
 </html>

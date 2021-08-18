@@ -18,14 +18,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Introduction)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.VideoURL)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PdfFilename)
-            </th>
+            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.IsActive)
+                @*@Html.DisplayNameFor(model => model.IsActive)*@
+                Completion Status
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cours.CourseName)
@@ -42,14 +43,23 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Introduction)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.VideoURL)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PdfFilename)
-                </td>
+                    <a href="@Url.Content("~/Content/images/pdf/" + @item.PdfFilename)" target="_blank">Click to View Document</a>
+                </td>*@
                 <td>
-                    @Html.DisplayFor(modelItem => item.IsActive)
+                    @*@Html.DisplayFor(modelItem => item.IsActive)*@
+                    @if (item.hasCompleted == true)
+                    {
+                        <span>Completed</span>
+                    }
+                    else
+                    {
+                        <span>Incomplete</span>
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Cours.CourseName)

@@ -655,3 +655,8 @@ h1 { width: 100%; font-size: 36px; color: #747474; text-align: center; }
 	.templatemo_home_midleft_in div.button { margin: 25px auto; }
  
 }
+
+.navbar-default .navbar-collapse ul li a.active {
+    background: #07343c;
+    color: #02e0f8;
+}

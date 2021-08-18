@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LMSProject.DATA.EF;
+using Microsoft.AspNet.Identity;
 
 namespace LMSProject.UI.MVC.Controllers
 {
@@ -15,10 +16,25 @@ namespace LMSProject.UI.MVC.Controllers
         private LMSEntities1 db = new LMSEntities1();
 
         // GET: CourseCompletions
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var courseCompletions = db.CourseCompletions.Include(c => c.Cours).Include(c => c.UserDetail);
-            return View(courseCompletions.ToList());
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            string userid = User.Identity.GetUserId();
+            if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("Manager") && Request.IsAuthenticated)
+            {
+                var employeeComps = db.CourseCompletions.Include(c => c.Cours).Include(c => c.UserDetail);
+
+                return View(employeeComps.ToList().OrderBy(c => c.UserDetail.FirstName));
+            }
+            else
+            {
+                var courseCompletions = db.CourseCompletions.Where(c => c.UserId == userid).Include(c => c.Cours).Include(c => c.UserDetail);
+                return View(courseCompletions.ToList());
+            }
+
         }
 
         // GET: CourseCompletions/Details/5

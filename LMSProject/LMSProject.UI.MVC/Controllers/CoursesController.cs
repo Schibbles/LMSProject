@@ -4,9 +4,11 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using LMSProject.DATA.EF;
+using Microsoft.AspNet.Identity;
 
 namespace LMSProject.UI.MVC.Controllers
 {
@@ -15,24 +17,63 @@ namespace LMSProject.UI.MVC.Controllers
         private LMSEntities1 db = new LMSEntities1();
 
         // GET: Courses
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View(db.Courses.ToList());
+            string currentUserId = User.Identity.GetUserId();
+            var cc = db.CourseCompletions.Where(x => x.UserId == currentUserId);
+            var courses = db.Courses;
+            foreach (var c in cc)
+            {
+                foreach (var course in courses)
+                {
+                    if (course.CourseId == c.CourseId)
+                    {
+                        course.hasCompleted = true;
+                    }
+                }
+            }
+            return View(courses.ToList());
         }
 
         // GET: Courses/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
+            string currentUserId = User.Identity.GetUserId();
+            var cl = db.LessonViews.Where(x => x.UserId == currentUserId);
+            var lessons = db.Lessons.Include(l => l.Cours);
+            foreach (var c in cl)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                foreach (var lesson in lessons)
+                {
+                    lesson.hasCompleted = true;
+                }
             }
+            #region Records Lessons Completed
+            string userid = User.Identity.GetUserId();
+            LessonView lessonView = new LessonView();
+            lessonView.UserId = userid;
+            lessonView.LessonId = id;
+            lessonView.DateViewed = DateTime.Now;
+
+            //Record only first time viewed
+
+            var firstView = db.LessonViews.Where(x => x.LessonId == id && x.UserId == userid).FirstOrDefault();
+            if (User.IsInRole("Employee") && firstView == null)
+            {
+                db.LessonViews.Add(lessonView);
+                db.SaveChanges();
+            }
+            #endregion
+
             Course course = db.Courses.Find(id);
             if (course == null)
             {
                 return HttpNotFound();
             }
-            return View(course);
+            
+            var clessons = db.Lessons.Where(x => x.CourseId == course.CourseId);
+            return View(clessons.ToList());
+            
         }
 
         // GET: Courses/Create

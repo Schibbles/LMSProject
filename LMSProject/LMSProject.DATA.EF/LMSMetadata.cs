@@ -8,7 +8,9 @@ using System.ComponentModel.DataAnnotations;
 namespace LMSProject.DATA.EF
 {
     [MetadataType(typeof(CourseMetadata))]
-    public partial class Course { }
+    public partial class Course {
+        public bool hasCompleted { get; set; }
+    }
 
     public class CourseMetadata
     {
@@ -41,11 +43,12 @@ namespace LMSProject.DATA.EF
         public int CourseId { get; set; }
 
         [Required]
+        [Display(Name = "Date Completed")]
         public DateTime DateCompleted { get; set; }
     }
 
     [MetadataType(typeof(LessonMetadata))]
-    public partial class Lesson { }
+    public partial class Lesson { public bool hasCompleted { get; set; } }
 
     public class LessonMetadata
     {
@@ -122,7 +125,7 @@ namespace LMSProject.DATA.EF
     public partial class UserDetail
     {
         [Display(Name = "Name")]
-        public string FullName => FirstName + "" + LastName;
+        public string FullName => FirstName + " " + LastName;
     }
     
 }

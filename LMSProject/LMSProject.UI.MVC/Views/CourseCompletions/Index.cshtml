@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.Cours.CourseName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+                @Html.DisplayNameFor(model => model.UserDetail.FullName)
             </th>
             <th></th>
         </tr>
@@ -34,9 +34,13 @@
                     @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CourseCompletionId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.CourseCompletionId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CourseCompletionId })
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin, Manager"))
+                    {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CourseCompletionId }) @:|
+
+                    }
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.CourseCompletionId }) |*@
+                    @Html.ActionLink("Details", "Details", new { id = item.CourseCompletionId })
                 </td>
             </tr>
         }

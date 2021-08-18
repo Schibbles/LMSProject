@@ -1,13 +1,14 @@
-﻿    <!-- contact start -->
+﻿@model LMSProject.UI.MVC.Models.ContactViewModel
+<!-- contact start -->
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <div class="templatemo_contact_top shadow">
-                <div class="templatemo_contact_top_title">CONTACT INFORMATION</div>
-                <div class="templatemo_contact_top_sub">LOREM RUIS BIBENDUM</div>
-                <p>This is free website template from templatemo. Morbi sagittis, purus eu vestibulum facilisis, dolor enim lacinia dui, vulputate dapibus lacus tortor at elit. Integer neque. Aenean molestie mollis sapien. Morbi scelerisque pellentesque nulla. Duis blandit, nunc sed porttitor congue, eros nisl consectetuer purus, quis elementum leo risus pharetra quam. Nulla posuere. Morbi et nisi in augue accumsan imperdiet. Cras eget ante ac leo pretium mollis. Duis convallis rutrum leo.</p>
-            </div>
-        </div>
+        @*<div class="col-md-12">
+                <div class="templatemo_contact_top shadow">
+                    <div class="templatemo_contact_top_title">CONTACT INFORMATION</div>
+                    <div class="templatemo_contact_top_sub">LOREM RUIS BIBENDUM</div>
+                    <p>This is free website template from templatemo. Morbi sagittis, purus eu vestibulum facilisis, dolor enim lacinia dui, vulputate dapibus lacus tortor at elit. Integer neque. Aenean molestie mollis sapien. Morbi scelerisque pellentesque nulla. Duis blandit, nunc sed porttitor congue, eros nisl consectetuer purus, quis elementum leo risus pharetra quam. Nulla posuere. Morbi et nisi in augue accumsan imperdiet. Cras eget ante ac leo pretium mollis. Duis convallis rutrum leo.</p>
+                </div>
+            </div>*@
 
     </div>
 </div>
@@ -16,23 +17,71 @@
         <div class="col-md-12">
             <div class="templatemo_contact shadow">
                 <div class="title">CONTACT US</div>
-                <div class="subtitle">LOREM RUIS BIBENDUM</div>
-                <div class="col-md-6">
-                    <form action="#" method="post">
-                        <input type="text" name="textfield" id="nametext" class="name" placeholder="NAME">
-                        <input type="text" name="textfield" id="emailtext" class="email" placeholder="EMAIL">
-                        <textarea name="" class="message" placeholder="MESSAGE ... "></textarea>
-                        <button type="submit" class="blue">SEND</button>
-                    </form>
+                @*<div class="subtitle">LOREM RUIS BIBENDUM</div>*@
+
+                @*<div class="col-md-12">
+                        <form action="#" method="post">
+                            <input type="text" name="textfield" id="nametext" class="name" placeholder="NAME" />
+                            <input type="text" name="textfield" id="emailtext" class="email" placeholder="EMAIL" />
+                            <input type="text" name="textfield" id="subjecttext" class="name" placeholder="SUBJECT" />
+                            <textarea name="" class="message" placeholder="MESSAGE ... "></textarea>
+                            <button type="submit" class="blue">SEND</button>
+                        </form>
+                    </div>*@
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="col-md-12">
+                            <fieldset>
+
+
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Please enter your Name" } })
+
+
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                            <fieldset>
+
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Please enter your Email" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                            <fieldset>
+                                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", placeholder = "Please enter a Subject" } })
+                                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                            </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                            <fieldset>
+
+                                @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control", placeholder = "Your message here." } })
+                                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                            </fieldset>
+                        </div>
+                        <div class="col-md-1">
+                            <fieldset>
+                                <button type="submit" class="button blue">Send</button>
+                            </fieldset>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div id="templatemo_map"></div>
+                        </div>
+                        <div class="clear"></div>
+
+
+
+                    </div>
+                }
                 </div>
-                <div class="col-md-6">
-                    <div id="templatemo_map"></div>
-                </div>
-                <div class="clear"></div>
             </div>
-
         </div>
-
     </div>
-</div>
-<!-- contact end -->
+    <!-- contact end -->

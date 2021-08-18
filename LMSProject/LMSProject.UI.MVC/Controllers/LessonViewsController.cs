@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LMSProject.DATA.EF;
+using Microsoft.AspNet.Identity;
 
 namespace LMSProject.UI.MVC.Controllers
 {
@@ -17,8 +18,9 @@ namespace LMSProject.UI.MVC.Controllers
         // GET: LessonViews
         public ActionResult Index()
         {
-            var lessonViews = db.LessonViews.Include(l => l.Lesson).Include(l => l.UserDetail);
-            return View(lessonViews.ToList());
+            string currentUserID = User.Identity.GetUserId();
+            var lessonViews = db.LessonViews.Where(lv => lv.UserId == currentUserID).Include(l => l.Lesson).Include(l => l.UserDetail).FirstOrDefault();
+            return View(lessonViews);
         }
 
         // GET: LessonViews/Details/5

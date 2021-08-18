@@ -1,46 +1,83 @@
-﻿@model LMSProject.DATA.EF.Course
+﻿@model IEnumerable<LMSProject.DATA.EF.Lesson>
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Lessons";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Course</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CourseName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CourseName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CourseDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CourseDescription)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-    </dl>
-</div>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-    {
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CourseId }) @:|
-    }
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Create New", "Create")
 </p>
+<table class="table templatemo_home_top_left shadow">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LessonTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Introduction)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.VideoURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PdfFilename)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.IsActive)
+            Completion Status
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Cours.CourseName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="@Url.Action("Details", "Lessons", new { id = item.LessonId }, null)">@Html.DisplayFor(modelItem => item.LessonTitle)</a>
+</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Introduction)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.VideoURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PdfFilename)
+        </td>*@
+        @*<td>*@
+            @*@Html.DisplayFor(modelItem => item.IsActive)*@
+            @*@if (item.hasCompleted == true)
+            {
+                <span>Completed</span>
+            }
+            else
+            {
+                <span>Incomplete</span>
+            }*@
+        @*</td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Cours.CourseName)
+        </td>
+        <td>
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Edit", "Edit", "Lessons", new { id = item.LessonId }, null) @:|
+                @Html.ActionLink("Delete", "Delete", "Lessons", new { id = item.LessonId }, null) @:|
+
+}
+            @Html.ActionLink("Details", "Details", "Lessons", new { id = item.LessonId }, null)
+        </td>
+    </tr>
+}
+
+</table>
+<p>
+    @Html.ActionLink("Back to Courses", "Index", "Courses")
+</p>
+

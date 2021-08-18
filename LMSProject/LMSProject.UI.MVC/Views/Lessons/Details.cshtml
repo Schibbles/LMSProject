@@ -1,14 +1,14 @@
 ﻿@model LMSProject.DATA.EF.Lesson
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Lessons";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <div>
-    <h4>Lesson</h4>
-    <hr />
+    @*<h4>Lesson</h4>
+    <hr />*@
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.LessonTitle)
@@ -31,7 +31,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.VideoURL)
+            @*@Html.DisplayFor(model => model.VideoURL)*@
+            <iframe id="ytplayer" typeof="text/html" width="640" height="360" src="@Model.VideoURL" frameborder="0"></iframe>
         </dd>
 
         <dt>
@@ -39,7 +40,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PdfFilename)
+            @*@Html.DisplayFor(model => model.PdfFilename)*@
+            <a href="@Url.Content("~/Content/images/pdf/" + Model.PdfFilename)" target="_blank">Click to View Document</a>
         </dd>
 
         <dt>
@@ -61,6 +63,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.LessonId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.LessonId }) |*@
+    @Html.ActionLink("Back to List", "Details", "Courses", new { id = Model.CourseId }, null)
 </p>

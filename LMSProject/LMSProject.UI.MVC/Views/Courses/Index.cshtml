@@ -19,7 +19,8 @@
                 @Html.DisplayNameFor(model => model.CourseDescription)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsActive)
+                @*@Html.DisplayNameFor(model => model.IsActive)*@
+                Completion Status
             </th>
             <th></th>
         </tr>
@@ -28,13 +29,21 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CourseName)
+                    <a href="@Url.Action("Details", "Courses", new { id = item.CourseId }, null)" >@Html.DisplayFor(modelItem => item.CourseName)</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CourseDescription)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IsActive)
+                    @*@Html.DisplayFor(modelItem => item.IsActive)*@
+                    @if (item.hasCompleted == true)
+                    {
+                        <span>Completed</span>
+                    }
+                    else
+                    {
+                        <span>Incomplete</span>
+                    }
                 </td>
                 <td>
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
